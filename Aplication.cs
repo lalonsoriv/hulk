@@ -21,7 +21,7 @@ namespace hulk
             {
 
                 System.Console.WriteLine("##Por favor introduzca su código en la siguiente línea...");
-                //Hasta que se presione Ctr + c continuara el ciclo
+                //Hasta que se presione Ctrl + C continuará el ciclo
                 do
                 {
                     Start();
@@ -30,7 +30,7 @@ namespace hulk
             else System.Console.WriteLine("##Esta no es una opción, intente otra vez");
         }
 
-        //Imprime una lista de las operaciones que puede realizar con la aplicacion 
+        //Imprime una lista de las operaciones que puede realizar con la aplicación 
         private static void Help()
         {
             System.Console.ForegroundColor = ConsoleColor.Green;
