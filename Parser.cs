@@ -267,7 +267,7 @@ namespace hulk
             while (Match(Token.TypesOfToken.Pow_Token))
             {
                 Token oper = GetPreviuosToken();
-                Expression right = Unary();
+                Expression right = Power();
                 expression = new BinaryExpression(expression, oper, right);
             }
             return expression;
