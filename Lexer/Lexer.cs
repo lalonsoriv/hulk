@@ -29,12 +29,19 @@ namespace hulk
                 //En caso de ser comillas obterner el comentario
                 if (codeline[i] == '\"')
                 {
-                    Words comment = GetString(codeline, i + 1);
-                    //Añade el comentario como un único token a la lista tokenized
-                    tokenized.Add(new Token(Token.TypesOfToken.Chain, comment.words));
-                    //Mueve la siguiente posición que se va a verificar hacia el último lugar del comentario
-                    i = comment.finalPosition;
-                    continue;
+                    try
+                    {
+                        Words comment = GetString(codeline, i + 1);
+                        //Añade el comentario como un único token a la lista tokenized
+                        tokenized.Add(new Token(Token.TypesOfToken.Chain, comment.words));
+                        //Mueve la siguiente posición que se va a verificar hacia el último lugar del comentario
+                        i = comment.finalPosition;
+                        continue;
+                    }
+                    catch (System.Exception)
+                    {
+                        throw new Error.Lexical_Error((i + 1).ToString());
+                    }
                 }
 
                 //Si es un espacio en blanco o una tabulación continuará a la próxima posición de existir
@@ -50,30 +57,51 @@ namespace hulk
                 //Si es un número lo añade a la lista y se mueve a la siguiente posición
                 if (char.IsDigit(codeline[i]))
                 {
-                    Numbers number = GetNumber(codeline, i);
-                    tokenized.Add(new Token(Token.TypesOfToken.Number, number.number));
-                    i = number.finalPosition;
-                    continue;
+                    try
+                    {
+                        Numbers number = GetNumber(codeline, i);
+                        tokenized.Add(new Token(Token.TypesOfToken.Number, number.number));
+                        i = number.finalPosition;
+                        continue;
+                    }
+                    catch (System.Exception)
+                    {
+                        throw new Error.Lexical_Error((i + 1).ToString());
+                    }
                 }
-                
+
                 //Si es un palabra lo añade a la lista y se mueve a la siguiente posición
                 if (char.IsLetter(codeline[i]) || codeline[i] == '_')
                 {
-                    Words terms = Variables(codeline, i);
-                    temp = terms.words;
-                    tokenized.Add(GetToken(temp));
-                    i = terms.finalPosition;
-                    temp = "";
-                    continue;
+                    try
+                    {
+                        Words terms = Variables(codeline, i);
+                        temp = terms.words;
+                        tokenized.Add(GetToken(temp));
+                        i = terms.finalPosition;
+                        temp = "";
+                        continue;
+                    }
+                    catch (System.Exception)
+                    {
+                        throw new Error.Lexical_Error((i + 1).ToString());
+                    }
                 }
 
                 //Si es un operador lo añade a la lista y se mueve a la siguinte posición
                 if (!char.IsLetterOrDigit(codeline[i]))
                 {
-                    Token token = Operators(codeline, i);
-                    tokenized.Add(token);
-                    if (token.Value.Length == 2) i += 1;
-                    continue;
+                    try
+                    {
+                        Token token = Operators(codeline, i);
+                        tokenized.Add(token);
+                        if (token.Value.Length == 2) i += 1;
+                        continue;
+                    }
+                    catch (System.Exception)
+                    {
+                        throw new Error.Lexical_Error((i + 1).ToString());
+                    }
                 }
             }
             return tokenized;
@@ -95,7 +123,7 @@ namespace hulk
                 }
                 temp += codeline[position];
                 position++;
-                if (position + 1 == codeline.Length) throw new Error.Lexical_Error(position.ToString());
+                if (position == codeline.Count()) throw new Error.Lexical_Error(position.ToString());
             }
             result.words = temp;
             //Guarda la posición en que terminó el ciclo para así continuar revisando la entrada del usuario
