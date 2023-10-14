@@ -10,11 +10,11 @@ namespace hulk
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 this.message = missed switch
                 {
-                    '(' => "Olvidó poner un '(' después de " + message1.ToString(),
-                    ')' => "Olvidó poner un ')' después de " + message1.ToString(),
-                    ',' => "Después de " + message1.ToString() + " debería de ir ','",
+                    '(' => "Olvidó poner un \"(\" después de " + message1.ToString(),
+                    ')' => "Olvidó poner un \")\" después de " + message1.ToString(),
+                    ',' => "Después de " + message1.ToString() + " debería de ir \",\"",
                     ';' => "Debería haber terminado la expresión con \";\"",
-                    '=' => "Después de " + message1.ToString() + " debería de ir '='",
+                    '=' => "Después de " + message1.ToString() + " debería de ir \"=\"",
                     'a' => "Se esperaba \"=>\" en lugar de " + message1.ToString() + " despues de declarar la función",
                     'b' => "No es posible utilizar " + message1.ToString() + " con más de una condición",
                     'c' => "Se esperaba una asignación de variable en lugar de " + message1.ToString(),
@@ -51,7 +51,7 @@ namespace hulk
                     'b' => "No es posible con " + message1.ToString() + " y " + message2.ToString() + " realizar la operación " + oper.Value.ToString(),
                     'c' => "No es posible convertir " + message1.ToString() + " a bool",
                     'n' => "No es posible evaluar esta expresión",
-                    's' => "Ha ocurrido un Stack overflow al llamar a la función " + message1.ToString(),
+                    's' => "Ha ocurrido un Stack Overflow al llamar a la función " + message1.ToString(),
                     'u' => "No es posible realizar la operación " + oper.Value.ToString() + " con la expresión " + message1.ToString(),
                     _ => "",
                 };
