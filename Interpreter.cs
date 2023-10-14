@@ -196,7 +196,7 @@ namespace hulk
             {
                 try
                 {
-                    if (left == right) return true;
+                    if (Equals(left, right)) return true;
                     else return false;
                 }
                 catch (System.Exception)
@@ -235,7 +235,7 @@ namespace hulk
             {
                 try
                 {
-                    if (left != right) return true;
+                    if (!Equals(left, right)) return true;
                     else return false;
                 }
                 catch (System.Exception)
