@@ -200,7 +200,7 @@ namespace hulk
                 throw new Error.Lexical_Error(position.ToString());
             }
             result.words = temp;
-            //Guarda la posición en que terminó el ciclo para así continuar revisando la entrada del usuario
+            //Guarda la posición en que terminó el ciclo para así continuar revisando la entrada del usuario 
             result.finalPosition = position - 1;
             return result;
         }
